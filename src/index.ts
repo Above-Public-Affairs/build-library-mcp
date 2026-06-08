@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Build Library MCP Server
+ * Website Ideas MCP Server
  *
  * A Model Context Protocol server for a personal build reference library.
  * Bookmark websites, UI patterns, and technical implementations with
@@ -50,7 +50,7 @@ async function startHttpServer(): Promise<void> {
   app.get("/health", (_req, res) => {
     res.json({
       status: "ok",
-      name: "website-build-ideas",
+      name: "website-ideas",
       version: "1.0.0",
     });
   });
@@ -98,7 +98,7 @@ async function startHttpServer(): Promise<void> {
   });
 
   app.listen(port, () => {
-    console.error(`Build Library MCP server listening on port ${port}`);
+    console.error(`Website Ideas MCP server listening on port ${port}`);
     console.error(`Streamable HTTP: http://localhost:${port}/mcp`);
     console.error(`Health check: http://localhost:${port}/health`);
   });
@@ -108,7 +108,7 @@ async function startStdioServer(): Promise<void> {
   const server = createServer(db);
   const transport = new StdioServerTransport();
 
-  console.error("Starting Build Library MCP server (stdio)...");
+  console.error("Starting Website Ideas MCP server (stdio)...");
   console.error("Available tools: save_bookmark, search_bookmarks, list_bookmarks, list_tags, get_bookmark, update_bookmark, delete_bookmark");
 
   await server.connect(transport);

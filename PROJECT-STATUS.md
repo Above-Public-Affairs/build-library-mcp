@@ -1,18 +1,18 @@
-# Website Build Ideas — Project Status
+# Website Ideas — Project Status
 
 ## Current Status
 
 **Phase:** Deployed
 **Last Updated:** June 8, 2026
 
-The Website Build Ideas server is live on Railway with PostgreSQL storage and is available to the team as an Organization Connector in claude.ai. All 7 tools work — verified end-to-end on June 8 with a full MCP handshake and a live `list_tags` call against the deployed endpoint. The `/mcp` endpoint is open (no auth), matching the team's other six connectors; access is gated by the obscure Railway URL.
+The Website Ideas server is live on Railway with PostgreSQL storage and is available to the team as an Organization Connector in claude.ai. All 7 tools work — verified end-to-end on June 8 with a full MCP handshake and a live `list_tags` call against the deployed endpoint. The `/mcp` endpoint is open (no auth), matching the team's other six connectors; access is gated by the obscure Railway URL.
 
 ## Infrastructure
 
-- Railway service `build-library-mcp` deployed and healthy (Streamable HTTP at `/mcp`)
+- Railway service `website-ideas` deployed and healthy (Streamable HTTP at `/mcp`)
 - PostgreSQL database running with auto-migration on startup
 - Distributed as an Organization Connector in claude.ai (Chat, Cowork, and web) — the old `team-mcp-servers.json` setup-script mechanism is retired
-- GitHub repo (`Above-Public-Affairs/build-library-mcp`) connected for auto-deploy on push to `main`
+- GitHub repo (`Above-Public-Affairs/website-ideas`) connected for auto-deploy on push to `main`
 
 ## To-Do
 

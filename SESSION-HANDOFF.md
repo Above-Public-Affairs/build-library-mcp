@@ -4,20 +4,22 @@ _Last updated: June 8, 2026_
 
 ## Where we are
 
-The server is deployed and live. On June 8 it was renamed from "Website Build Ideas" to "Website Ideas" — including the GitHub repo, Railway service, and live `/mcp` URL. Because the URL changed, the existing Organization Connector in claude.ai must be deleted and re-added with the new URL (see Next steps and the notes below).
+The server is deployed and live. On June 8 it was renamed from "Website Build Ideas" to "Website Ideas". **Done and shipped to `main`:** code + MCP identity (`website-ideas`), npm package, error-reporting slug, the **GitHub repo** (`Above-Public-Affairs/website-ideas`), and all docs. The renamed code is deployed and verified (the MCP handshake reports `serverInfo.name = "website-ideas"`).
+
+**Still pending — manual steps (see Next steps):** the Railway service/project rename and the public-URL change (the Railway API only *stages* domain edits and they don't apply — these must be done in the Railway dashboard), the project-folder rename on disk, and re-adding the org Connector once the URL actually changes. The current live URL is still `https://build-library-mcp-production.up.railway.app` and the existing org Connector still works against it — **do NOT delete that connector until the new URL is live.**
 
 ## What's built
 
 - **MCP server** (`src/index.ts`) exposing 7 tools: `save_bookmark`, `search_bookmarks`, `list_bookmarks`, `list_tags`, `get_bookmark`, `update_bookmark`, `delete_bookmark`.
 - **Transport:** Streamable HTTP at `/mcp` when `PORT` is set (Railway); stdio otherwise (local use).
 - **Storage:** Railway PostgreSQL with full-text search and GIN-indexed tags; migrations run on startup.
-- **Deployment:** Railway service `website-ideas` (project "Website Ideas"), auto-deploys from `Above-Public-Affairs/website-ideas` on push to `main`. Live at `https://website-ideas-production.up.railway.app`.
+- **Deployment:** Railway service still named `build-library-mcp` (project "Website Build Ideas") — renaming these to `website-ideas` / "Website Ideas" is a pending manual dashboard step (not available via the Railway API). Auto-deploys from `Above-Public-Affairs/website-ideas` (repo already renamed) on push to `main`. **Current live URL:** `https://build-library-mcp-production.up.railway.app`. **Target URL after the dashboard rename:** `https://website-ideas-production.up.railway.app`.
 - **Distribution:** Organization Connector in claude.ai, available to the team across Chat, Cowork, and web.
 - **Error reporting:** wired via `canter-error-reporter`.
 
 ## Environment variables
 
-Set on the Railway `website-ideas` service (the values live in Railway, not here):
+Set on the Railway service (currently named `build-library-mcp`; the values live in Railway, not here):
 
 - `DATABASE_URL` — Postgres connection string (provided by the Railway Postgres plugin)
 - `ERROR_API_URL` — central error-reporter endpoint
@@ -28,7 +30,17 @@ Set on the Railway `website-ideas` service (the values live in Railway, not here
 
 ## Next steps
 
-**Re-add the org Connector.** The infra rename changed the `/mcp` URL, so the old Connector entry is dead. In claude.ai → Organization settings → Connectors, **delete the old `website-build-ideas` connector and add a fresh one** (don't edit the old entry — see the "poisoned connector" note) pointing at `https://website-ideas-production.up.railway.app/mcp`, named `website-ideas`. After that the server is live again and future work is feature-level (new bookmarks, new tools), not infrastructure.
+Three manual steps remain to finish the infra rename. Order matters; nothing is broken in the meantime (the old URL + connector keep working).
+
+1. **Railway dashboard rename** (the API can't do these — it only stages domain edits that never apply):
+   - Service → Settings → rename `build-library-mcp` → `website-ideas`.
+   - Project → Settings → rename "Website Build Ideas" → "Website Ideas".
+   - Service → Settings → Networking → change the generated domain to `website-ideas-production.up.railway.app` (rename the service first, then regenerate/edit the generated domain prefix). If Railway left a staged/unapplied networking change from the rename attempt, review and discard it first so you start clean.
+   - Verify: `https://website-ideas-production.up.railway.app/health` returns `{"name":"website-ideas"}`.
+2. **Re-add the org Connector** — only after the new URL is confirmed live. In claude.ai → Organization settings → Connectors, **delete the old connector and add a fresh one** (don't edit the old entry — see the "poisoned connector" note) pointing at `https://website-ideas-production.up.railway.app/mcp`, named `website-ideas`.
+3. **Rename the project folder** on disk: `Development/Website Build Ideas/` → `Development/Website Ideas/`, once no git worktrees are active inside it (there are linked worktrees under `.claude/worktrees/` — remove them first).
+
+After those, the rename is fully complete and future work is feature-level (new bookmarks, new tools).
 
 ## Known issues / notes
 
@@ -41,7 +53,7 @@ Set on the Railway `website-ideas` service (the values live in Railway, not here
 Verify the live server end-to-end (handshake, then list and call a tool):
 
 ```
-BASE="https://website-ideas-production.up.railway.app/mcp"
+BASE="https://build-library-mcp-production.up.railway.app/mcp"   # current live URL; switch to website-ideas-production once the dashboard domain rename is done
 # initialize and capture the session id
 curl -sS -D /tmp/h.txt -o /dev/null -X POST "$BASE" \
   -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' \
@@ -59,4 +71,4 @@ Build locally:
 npm run build
 ```
 
-Redeploy or change env vars: use the Railway MCP (project "Website Ideas", service `website-ideas`).
+Redeploy or change env vars: use the Railway MCP (project "Website Build Ideas", service `build-library-mcp` — names pending the dashboard rename above).

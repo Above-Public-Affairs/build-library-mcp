@@ -9,7 +9,7 @@ The Website Ideas server is live on Railway with PostgreSQL storage and is avail
 
 ## Infrastructure
 
-- Railway service deployed and healthy (Streamable HTTP at `/mcp`) — **still named `build-library-mcp` at `build-library-mcp-production.up.railway.app`**; renaming the service/project and changing the URL to `website-ideas` is a pending manual dashboard step (the Railway API can't rename services or apply domain changes)
+- Railway **project "Website Ideas" / service `website-ideas`** deployed and healthy (Streamable HTTP at `/mcp`) at `https://build-library-mcp-production.up.railway.app` — the original generated URL was kept (a service rename doesn't change it), so the org Connector is unchanged and working
 - PostgreSQL database running with auto-migration on startup
 - Distributed as an Organization Connector in claude.ai (Chat, Cowork, and web) — the old `team-mcp-servers.json` setup-script mechanism is retired
 - GitHub repo (`Above-Public-Affairs/website-ideas`) connected for auto-deploy on push to `main`
@@ -24,6 +24,6 @@ The Website Ideas server is live on Railway with PostgreSQL storage and is avail
 - [x] Add to claude.ai as an Organization Connector
 - [x] Update CLAUDE.md and PROJECTS-STATUS.md
 - [x] Rename project to **Website Ideas** — code, MCP identity, npm package, error-reporting slug, GitHub repo, and all docs (June 8)
-- [ ] **Railway dashboard:** rename service `build-library-mcp` → `website-ideas`, rename project → "Website Ideas", change the generated domain → `website-ideas-production.up.railway.app`
-- [ ] **Re-add the org Connector** in claude.ai with the new URL (delete old + add fresh) once the new URL is live
-- [ ] **Rename the folder** `Website Build Ideas/` → `Website Ideas/` on disk once no git worktrees are active inside it
+- [x] Railway: renamed **project** → "Website Ideas" and **service** → `website-ideas`; reconnected the GitHub source after the repo rename (June 8)
+- [x] Decided to **keep the existing URL** `build-library-mcp-production.up.railway.app` (a service rename doesn't change the generated domain, and keeping it avoids re-adding the org Connector) — Connector unchanged and working
+- [ ] **Rename the folder** `Website Build Ideas/` → `Website Ideas/` on disk (in progress — remove the git worktrees under `.claude/worktrees/` first, or `git worktree prune` after)

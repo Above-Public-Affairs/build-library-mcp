@@ -3,7 +3,7 @@
 ## [2026-06-08]
 
 ### Changed
-- Renamed the project from "Website Build Ideas" to "Website Ideas" — updated the display name, MCP server identity (`website-ideas`), error-reporting slug, GitHub repo, Railway service and live URL, npm package, and project folder.
+- Renamed the project from "Website Build Ideas" to "Website Ideas" — updated the display name, MCP server identity (`website-ideas`), error-reporting slug, GitHub repo, Railway project + service, npm package, and project folder. The Railway-generated URL (`build-library-mcp-production.up.railway.app`) was intentionally kept, so the org Connector needs no change.
 
 ### Fixed
 - Couldn't be added as an Organization Connector in claude.ai. The `/mcp` endpoint required a bearer token, but the Connector UI has no field to supply one — so Claude fell back to OAuth, tried to self-register, and failed ("Couldn't register with Website Ideas's sign-in service"). The endpoint is now open like the team's other servers; access is gated by the obscure Railway URL.

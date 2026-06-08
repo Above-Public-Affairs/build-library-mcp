@@ -37,7 +37,7 @@ Single `bookmarks` table with GIN indexes for tags and full-text search.
 ## Infrastructure
 
 - **GitHub:** `Above-Public-Affairs/website-ideas`
-- **Railway project:** Website Ideas
-- **URL:** `https://website-ideas-production.up.railway.app`
+- **Railway project:** Website Ideas (service `website-ideas`)
+- **URL:** `https://build-library-mcp-production.up.railway.app` (original generated domain, intentionally kept — a service rename doesn't change it, and keeping it avoids re-adding the org Connector)
 - **MCP endpoint:** `/mcp`
 - **Health check:** `/health`

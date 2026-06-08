@@ -39,7 +39,7 @@ export function registerSaveTools(server: McpServer, db: DatabaseClient): void {
               text: JSON.stringify(
                 {
                   success: true,
-                  message: `Saved "${bookmark.name}" to build library (ID: ${bookmark.id})`,
+                  message: `Saved "${bookmark.name}" to your library (ID: ${bookmark.id})`,
                   bookmark: {
                     id: bookmark.id,
                     name: bookmark.name,
@@ -56,7 +56,7 @@ export function registerSaveTools(server: McpServer, db: DatabaseClient): void {
         };
       } catch (error) {
         reportError({
-          project: "website-build-ideas",
+          project: "website-ideas",
           category: "tool_error",
           message: error instanceof Error ? error.message : String(error),
           rawError: error,

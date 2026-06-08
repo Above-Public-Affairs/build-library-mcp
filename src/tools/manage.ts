@@ -35,7 +35,7 @@ export function registerManageTools(server: McpServer, db: DatabaseClient): void
         };
       } catch (error) {
         reportError({
-          project: "website-build-ideas",
+          project: "website-ideas",
           category: "tool_error",
           message: error instanceof Error ? error.message : String(error),
           rawError: error,
@@ -111,7 +111,7 @@ export function registerManageTools(server: McpServer, db: DatabaseClient): void
         };
       } catch (error) {
         reportError({
-          project: "website-build-ideas",
+          project: "website-ideas",
           category: "tool_error",
           message: error instanceof Error ? error.message : String(error),
           rawError: error,
@@ -160,7 +160,7 @@ export function registerManageTools(server: McpServer, db: DatabaseClient): void
         };
       } catch (error) {
         reportError({
-          project: "website-build-ideas",
+          project: "website-ideas",
           category: "tool_error",
           message: error instanceof Error ? error.message : String(error),
           rawError: error,

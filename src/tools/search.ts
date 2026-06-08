@@ -54,7 +54,7 @@ export function registerSearchTools(server: McpServer, db: DatabaseClient): void
         };
       } catch (error) {
         reportError({
-          project: "website-build-ideas",
+          project: "website-ideas",
           category: "tool_error",
           message: error instanceof Error ? error.message : String(error),
           rawError: error,
@@ -90,7 +90,7 @@ export function registerSearchTools(server: McpServer, db: DatabaseClient): void
                 type: "text" as const,
                 text: tag
                   ? `No bookmarks found with tag "${tag}".`
-                  : "The build library is empty. Save your first bookmark!",
+                  : "Your library is empty. Save your first bookmark!",
               },
             ],
           };
@@ -107,7 +107,7 @@ export function registerSearchTools(server: McpServer, db: DatabaseClient): void
         };
       } catch (error) {
         reportError({
-          project: "website-build-ideas",
+          project: "website-ideas",
           category: "tool_error",
           message: error instanceof Error ? error.message : String(error),
           rawError: error,
@@ -152,13 +152,13 @@ export function registerSearchTools(server: McpServer, db: DatabaseClient): void
           content: [
             {
               type: "text" as const,
-              text: `Tags in the build library:\n\n${formatted}`,
+              text: `Tags in your library:\n\n${formatted}`,
             },
           ],
         };
       } catch (error) {
         reportError({
-          project: "website-build-ideas",
+          project: "website-ideas",
           category: "tool_error",
           message: error instanceof Error ? error.message : String(error),
           rawError: error,

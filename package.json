@@ -1,11 +1,11 @@
 {
-  "name": "build-library-mcp",
+  "name": "website-ideas",
   "version": "1.0.0",
   "description": "MCP server for a personal build reference library — bookmark websites, UI patterns, and technical implementations",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "build-library-mcp": "./dist/index.js"
+    "website-ideas": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc",
@@ -15,7 +15,7 @@
   "keywords": [
     "mcp",
     "bookmarks",
-    "build-library",
+    "website-ideas",
     "reference",
     "claude",
     "anthropic"

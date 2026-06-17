@@ -1,5 +1,10 @@
 # Changelog
 
+## [2026-06-17]
+
+### Added
+- Connector icon (serverInfo.icons + favicon route)
+
 ## [2026-06-08]
 
 ### Changed

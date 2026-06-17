@@ -14,6 +14,9 @@
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { randomUUID } from "crypto";
+import { readFileSync } from "fs";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
 import express from "express";
 import { DatabaseClient } from "./db/client.js";
 import { runMigrations } from "./db/migrate.js";
@@ -45,6 +48,16 @@ async function startHttpServer(): Promise<void> {
   const app = express();
 
   const streamableTransports = new Map<string, StreamableHTTPServerTransport>();
+
+  // Connector icon
+  app.get("/favicon.ico", (_req, res) => {
+    try {
+      const iconPath = join(dirname(fileURLToPath(import.meta.url)), "..", "assets", "icon.svg");
+      res.type("image/svg+xml").send(readFileSync(iconPath, "utf-8"));
+    } catch {
+      res.status(404).end();
+    }
+  });
 
   // Health check
   app.get("/health", (_req, res) => {
